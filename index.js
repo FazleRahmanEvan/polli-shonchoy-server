@@ -10,14 +10,13 @@ const app = express ();
 app.use(cors({
   // credentials: true,
   methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH'],
-  origin:'*'}
-  ));
+  origin:'*'}));
 app.use(express.json());
 
 
 
 
-const uri = `mongodb+srv://${process.env.DB_user}:${process.env.DB_PASS}@cluster0.qsa2w5u.mongodb.net/?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://polli_shonchoy_bank:mQJas3mScQYHy8FT@cluster0.qsa2w5u.mongodb.net/?retryWrites=true&w=majority`;
 // console.log(uri)
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 

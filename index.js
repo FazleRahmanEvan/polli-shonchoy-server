@@ -7,7 +7,11 @@ require('dotenv').config();
 const app = express ();
 
 //MIDDLEWARE
-app.use(cors())
+app.use(cors({
+  // credentials: true,
+  methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH'],
+  origin:'*'}
+  ));
 app.use(express.json());
 
 

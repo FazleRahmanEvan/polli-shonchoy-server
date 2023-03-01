@@ -32,7 +32,37 @@ async function run(){
       const shoshogulaRinCollection = client.db('polliShonchoyBank').collection('shoshogulaRin');
       const shodoshoProttaharCollection = client.db('polliShonchoyBank').collection('shodoshoProttahar');
       const shomitiCreateCollection = client.db('polliShonchoyBank').collection('shomitiCreate');
+ 
+         //  সমিতি তথ্য
+     app.post('/shomitiCreate', async (req, res)=> {
+      const resp = await shomitiCreateCollection.insertOne({...req.body});
+      res.send(resp)
+   })
 
+   app.get('/shomitiCreate', async (req, res)=> {
+    const result = await shomitiCreateCollection.find().toArray();
+    res.send(result)
+ })
+//    app.get('/shomitiCreate/:shomitirNam', async (req, res)=> {
+//     const {shomitirNam} = req.params;
+//     const shodosho  = await shomitiCreateCollection.find({shomitirNam:shomitirNam});
+//     res.send(shodosho)
+//  })
+ app.get('/shomitiNam/:_id', async (req,res)=> {
+  const id = req.params._id;
+  
+  const query ={_id: ObjectId(id)}
+  const result = await shomitiCreateCollection.findOne(query);
+  const shodosshoList = await shadharonShodoshoCollection.find({ 
+    shomitirId: id }).toArray();
+
+
+  const data = {
+    result,
+    shodosshoList,
+  }
+  res.send(data);        
+})
 
        //  সাধারণ সদস্য প্রাপ্তির আবেদনপত্র
       app.post('/shadharonShodosho', async (req, res)=> {
@@ -200,16 +230,8 @@ app.get('/shoshsogulaRin/:_id', async (req,res)=> {
   res.send(result);        
 })
 
-     //  সমিতি তথ্য
-     app.post('/shomitiCreate', async (req, res)=> {
-      const resp = await shomitiCreateCollection.insertOne({...req.body});
-      res.send(resp)
-   })
+  
 
-   app.get('/shomitiCreate', async (req, res)=> {
-    const result = await shomitiCreateCollection.find().toArray();
-    res.send(result)
- })
 
 
 

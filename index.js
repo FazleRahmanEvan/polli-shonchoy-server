@@ -64,6 +64,8 @@ async function run(){
   res.send(data);        
 })
 
+
+
        //  সাধারণ সদস্য প্রাপ্তির আবেদনপত্র
       app.post('/shadharonShodosho', async (req, res)=> {
         const resp = await shadharonShodoshoCollection.insertOne({...req.body});
@@ -108,6 +110,15 @@ async function run(){
     console.log(id); 
     const query ={_id: ObjectId(id)}
     const result = await shodoshoOwaryNogodAdayBiboroniCollection.findOne(query);
+    console.log(result);
+    res.send(result);        
+  })
+
+  app.get('/NogodShomitiNam/:_id', async (req,res)=> {
+    const id = req.params._id;
+    console.log(id); 
+    const query ={_id: ObjectId(id)}
+    const result = await shomitiCreateCollection.findOne(query);
     console.log(result);
     res.send(result);        
   })
